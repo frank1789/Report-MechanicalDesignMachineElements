@@ -1,0 +1,104 @@
+\chapter{Homework 5}
+\begin{minipage}{.70\textwidth}
+\centering
+\includegraphics[width=0.8\linewidth]{imgHW5/HW5}
+\end{minipage}
+\begin{minipage}{.70\textwidth}
+\begin{tabular}{l}
+        DATA:\\
+        Material: steel;\\
+        Pressure: $P_{i}= 10$ \textsc{bar};
+\end{tabular}
+\end{minipage}\\\\
+The T pipe connector analyzed in HW 4 is now filletted at the junction between the two pipes to reduce the stress concentration factor. Using brick elements, build a submodel able to estimate the stress distribution along the periphery of the pipes' junction on the base of the displacement field computed with the shell model developed in HW 4. It is required to:
+\begin{enumerate}
+\item check for the sensitivity of the results upon the location of the cutting boundaries of the submodel.
+\end{enumerate}
+\section{Approach the problem}
+For this problem, first designing the pattern seen in homework 4 saving the results and after that we realize the submodel.
+Using the same work surfaces extrude the two vertical and horizontal cylinders, then they eliminate unneeded volumes. The result as show in figure \ref{img:HW5_GEOMsec1}.
+It builds the fillet eliminating the junction that was present in the previous step, figure \ref{img:HW5_GEOMsec3}.
+\begin{figure}[!h]
+\centering
+\subfloat[][First step construnction\label{img:HW5_GEOMsec1}]{\includegraphics[width=.8\linewidth]{imgHW5/HW5-Geometry_1_0}}\,
+\subfloat[][Second step construction\label{img:HW5_GEOMsec3}]{\includegraphics[width=.8\linewidth]{imgHW5/HW5-Geometry_2_0}}
+\caption{3D Geometry of T pipe}
+\label{img:HW5-GeomSection}
+\end{figure}\\
+The model is now trimmed to the sub pattern using two planes: one through the vertical plane; the second is horizontal. Finally the separate volumes are united in a single body.
+It realizes a free mesh with type elements \textsc{solid186}, assigned size of the elements is equal one millimeter; such as to ensure that there are at least two elements in the smallest thickness that makes up the vertical cylinder, the result is observable in fig. \ref{img:HW5_Mesh}.
+\begin{figure}[!h]
+\centering
+\includegraphics[width=.8\linewidth]{imgHW5/HW5-MeshDeatil_1_125}
+\caption{Mesh model}
+\label{img:HW5_Mesh}
+\end{figure}\\
+At this point, saving the coordinates of the nodes that are located on the surfaces generated from pattern cutting, for later use to define the conditions of the problem outline. 
+The results solution's Homework 4 are recalled and through interpolation is assigned a shift on the nodes that you have saved the coordinates above. Finally applies the same pressure of 10 \textsc{bar} and constraints.
+\section{Result}
+The study is carried out by varying the distance of the cut boundaries in such a way as not to modify the structure of the problem. defining a sub small model and then increase its size. The analysis is summarized, in the table \ref{tab:HW5_iter}, where the cutting distances are quoted with respect to the junction.\\
+\begin{table}[htb]
+\centering
+\begin{tabular}{cccc}
+\hline
+       iter&   Vertical cut  boundaries  &     Radius cut boundaries\\ 
+       		 &		$mm$                          &       $mm$\\     
+\hline
+        1	&		30,0000   &    65,0000\\
+        2	&    	35,0000   &    70,0000\\
+        3 &   	40,0000   &    75,0000\\
+        4 &    	45,0000   &    80,0000\\
+        5 &    	50,0000   &    85,0000\\
+        6 &    	55,0000   &    90,0000\\
+\hline
+\end{tabular}
+\caption{Cut boundaries distance}
+\label{tab:HW5_iter}
+\end{table}
+\newpage
+\noindent The results satisfied the equivalent stress, according to Von Mises, obtained under varying cut boundaries are shown in figures \ref{img:HW5-StressEQV_1}, \ref{img:HW5-StressEQV_2} and \ref{img:HW5-StressEQV_3}, it referred to as the stress shifts from the cut boundaries to the fillet.
+\begin{figure}[!h]
+\centering
+\subfloat[][\scriptsize Submodel at cut boundaries $65\,mm$, $65\,mm$\label{img:HW5_StressEqv_0}]{\includegraphics[width=.45\linewidth]{imgHW5/HW5-SolutionEQV_0}}\,
+\subfloat[][\scriptsize Submodel at cut boundaries $70\,mm$, $67,50\,mm$\label{img:HW5_StressEqv_25}]{\includegraphics[width=.45\linewidth]{imgHW5/HW5-SolutionEQV_25}}
+\caption{Von Mises equivalent stress}
+\label{img:HW5-StressEQV_1}
+\end{figure}
+\begin{figure}[!h]
+\centering
+\subfloat[][\scriptsize Submodel at cut boundaries $75\,mm$, $70\,mm$\label{img:HW5_StressEqv_50}]{\includegraphics[width=.45\linewidth]{imgHW5/HW5-SolutionEQV_50}}\,
+\subfloat[][\scriptsize Submodel at cut boundaries $80\,mm$, $72,50\,mm$\label{img:HW5_StressEqv_75}]{\includegraphics[width=.45\linewidth]{imgHW5/HW5-SolutionEQV_75}}
+\caption{Von Mises equivalent stress}
+\label{img:HW5-StressEQV_2}
+\end{figure}
+\begin{figure}[!h]
+\centering
+\subfloat[][\scriptsize Submodel at cut boundaries $85\,mm$, $75\,mm$\label{img:HW5_StressEqv_100}]{\includegraphics[width=.45\linewidth]{imgHW5/HW5-SolutionEQV_100}}\,
+\subfloat[][\scriptsize Submodel at cut boundaries $90\,mm$, $77,50\,mm$\label{img:HW5_StressEqv_125}]{\includegraphics[width=.45\linewidth]{imgHW5/HW5-SolutionEQV_125}}
+\caption{Von Mises equivalent stress}
+\label{img:HW5-StressEQV_3}
+\end{figure}
+\newpage
+\noindent It is observed in the graph, in the figure \ref{img:HW5-StressSensit}, which initially stress is high, then it takes on a downward path until it stabilizes. Increasing the size of the submodel is known that the more efforts are moving from the boundary condition in correspondence of the fitting and inside of the junction. 
+\begin{figure}[!h]
+\centering
+    \resizebox{.8\linewidth}{!}{\input{HW5Sensity.tex}}
+    \caption{Submodel' s sensitivity upon the location of the cutting boundaries}
+    \label{img:HW5-StressSensit}
+\end{figure}
+\newpage
+\noindent At this point you can graph the stress distribution along the connection by defining a path.
+Selecting the nodes present on the lines that define the fitting and which pass through the zone more stressed. Interactively define a path by selecting the nodes defining the effort that you want to analyze, equivalent Von Mises, getting the result shown in figure \ref{img:HW5-StressSensit}.
+\begin{figure}[!h]
+\centering
+    \includegraphics[width=.8\linewidth]{imgHW5/HW5-SolutionEQV_151}
+    \caption{Distribution of forces across the junction by defining a path}
+    \label{img:HW5-StressSensit}
+\end{figure}
+\section{Command list}
+%\begin{multicols}{2}
+\tiny
+%\lstinputlisting[language=APDL, style=apdl-modified]{CommandList-HW5.txt}
+\input{CommandList-HW5}
+\normalsize
+%\end{multicols}

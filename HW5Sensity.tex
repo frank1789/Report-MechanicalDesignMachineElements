@@ -1,0 +1,13 @@
+\begin{tikzpicture}
+\pgfplotsset{cycle list={blue\\}, major grid style={dashed},}
+\begin{axis}[
+						legend cell align={left},
+						width=15cm,
+						height=10cm,
+        				grid=major,
+        				ylabel=Stress $Mpa$,
+        				xlabel=Distance $mm$]
+\addplot [thick, Apricot] table[smooth, mark=none, y=stress, x=rCutBun]{StressEQV.txt};
+\addlegendentry{$\sigma_{eq}$ upon horizontal cut boundaries}
+\end{axis}
+\end{tikzpicture}

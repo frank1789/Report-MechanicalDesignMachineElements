@@ -1,0 +1,15 @@
+\begin{tikzpicture}
+\pgfplotsset{cycle list={cyan\\purple\\},}
+\begin{axis}[
+						width=15cm,
+						height=5cm,
+ 						xmin=800, xmax=900,
+        				ymin=-35, ymax=-20,
+						grid=major,]
+
+\addplot table[smooth, mark=none, y=displacement, x=n]{HW6-Set103.txt};
+\addlegendentry{lgend set 103}
+\addplot +[stack plots=displacement, stack dir=minus] table[smooth, mark=none, y=displacement, x=n]{HW6-Set101.txt};
+\addlegendentry{legend set 101}
+\end{axis}
+\end{tikzpicture}

@@ -1,0 +1,17 @@
+\begin{tikzpicture}
+\pgfplotsset{cycle list={orange\\pink\\purple\\red\\violet}, major grid style={dashed},}
+\begin{axis}[
+						width=15cm,
+						height=10cm,
+ 						xmin=0, xmax=200,
+        				grid= major,
+        				xlabel=Step,
+        				ylabel= Hoop strain $MPa$]
+\addplot [thick, smooth, mark=none, Emerald] table [y={pHS}, x={n}]{HW6HoopStrain.txt};
+\addplot [thick, smooth, mark=none, Emerald] table [y={nHS}, x={n}]{HW6HoopStrain.txt};
+\draw [dash dot, red](axis cs:0,-0.0047) -- (axis cs:200,-0.0047) node [midway, above ] {
+\textsc{\scriptsize \color{red}$5\,\%$}};
+\draw [dash dot, red](axis cs:9.608941617,0) -- (axis cs:9.608941617,-0.0047);
+\addlegendentry{Hoop strain}
+\end{axis}
+\end{tikzpicture}

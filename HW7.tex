@@ -1,0 +1,141 @@
+\chapter{Homework 7}
+\begin{minipage}{.70\textwidth}
+\centering
+\includegraphics[width=0.8\linewidth]{imgHW7/HW7}
+\end{minipage}
+\begin{minipage}{.70\textwidth}
+\begin{tabular}{l}
+        DATA:\\
+        $\frac{D}{d} = 1.4 $\\
+        $\frac{r}{d} = \frac{1}{20} $\\
+        $R = \frac{(D-d)}{2}$\\
+        Material: steel
+\end{tabular}
+\end{minipage}\\\\
+Determine the stress concentration factor (defined as ratio between the maximum first principal stress in the model and the remote stress acting on the cross-secton with diameter d), in the presence and in the absence of the optimized relief groove analyzed in Homework 3, when the shaft is subject to uniform bending and torsional moment.
+\section{Approach the problem}
+In this issue we used the geometric model produced in homework 3, setting the \textsc{x} previously found at a value equal to $\textsc{x} = 1,5$ for the shaft with relief groove. Then going to replace the elements of the mesh with the type \textsc{Plane25}. The mesh is mapped with the same number of divisions seen in Homework 3, obtaining the result shown in figures \ref{img:HW7-Geometry}.\\
+The material present the follow proprities:
+\begin{itemize}
+\item Modulus of elasticity: $210\, GPa$;
+\item Poissons ratio $0.3$.
+\end{itemize}
+Assumptions adopted:
+\begin{itemize}
+\item Element type for both model \textsc{Plane25};
+\item $x = 1.5$ optimal position;
+\item Bending moment : $1*10^5 Nm$;
+\item Torque moment: $1*10^6 Nm$;
+\end{itemize}
+\begin{figure}[htb]
+\centering
+\subfloat[][Gemotry - Shaft without relief groove]{\includegraphics[width=.7\textwidth]{/imgHW7/Part1/HW7-Geometry_PART1}} \\
+\subfloat[][Gemotry - Shaft relief groove]{\includegraphics[width=.7\textwidth]{/imgHW7/Part2/HW7-Geometry_PART2}} 
+\caption{Model of the shaft used in previous homework 3}
+\label{img:HW7-Geometry}
+\end{figure}
+\begin{figure}[!h]
+\centering
+\subfloat[][Shaft without relief groove]{\includegraphics[width=.8\textwidth]{/imgHW3/Part1/HW3-Mesh_PART1}} \\
+\subfloat[][Shaft relief groove]{\includegraphics[width=.8\textwidth]{/imgHW3//Part2/HW3-Mesh_PART2}}
+\label{img:HW3-meshed}
+\caption{Mapped mesh's model}
+\end{figure}\pagebreak
+\newpage
+\section{Result}
+An analysis is performed only by first applying a bending moment at the end of the two shafts and compared the values obtained in the presence or not of the relief groove.\\ It is repeated the same analysis this time, by applying a torque.
+Finally, it analyzed the combination of the moments of both shafts.
+The stress concentration factor subject to:
+\subsection{Bending moment}
+Impose a bending moment eqault to Mf $= 1 * 10^5 Nm$.\\
+The stress concentration factor is defined as: $K_{t} = \frac{ \sigma_{1,max}}{S_{nom}}$, where $\sigma_{1,max}=$ maximum first principal stress in the model\\
+\[S_{nom}= \frac{32Mf}{\pi d^3}=3,8340 \, MPa\]
+\begin{table}[h]
+\centering
+\begin{tabular}{lcc}
+\hline
+& Maximim first principal  & stress concentraton factor\\
+& stress in the model & of\\
+& $\frac{N}{mm^2}$ &analysis\\
+\hline
+normal shaft & $\sigma_{1,max}= 8,55803 $ &$K_{t1}= 2,23$\\
+shaft with relief groove & $\sigma_{1,max}=6,55013 $ &$K_{t1}=1,71$\\
+\hline
+\end{tabular}
+\end{table}
+Ratio of reduction $ = \frac{K_{t1}-K_{t2}}{K_{t1}}= 47,53 \%$
+\begin{figure}[!h]
+\centering
+\includegraphics[width=.8\textwidth]{/imgHW7/Part1/HW7-MaxFirstStressBendingMoment_PART1}
+\caption{Max First Stress Bending Moment - Shaft without relief groove}
+\label{img:HW7-MFBM1}
+\end{figure}
+\begin{figure}
+\centering
+\includegraphics[width=.8\textwidth]{/imgHW7/Part2/HW7-MaxFirstStressBendingMoment_PART2}
+\caption{Max First Stress Bending Moment - Shaft relief groove}
+\label{img:HW7-MFBM2}
+\end{figure}\\
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\newpage
+\subsection{Torque moment}
+Impose a torque equal to Mt $= 1 * 10^6 Nm$.\\
+The stress concentration factor is defined as: $K_{t}$ = $\frac{\sigma_{1,max}}{S_{nom}}$, where $\sigma_{1,max}=$ maximum first principal stress in the model\\
+\[S_{nom}= \frac{16Mt}{\pi d^3}=19,1702 \, MPa\]
+\begin{table}[h]
+\centering
+\begin{tabular}{lcc}
+\hline
+& Maximim first principal  & stress concentraton factor\\
+& stress in the model & of\\
+& $\frac{N}{mm^2}$ &analysis\\
+\hline
+normal shaft & $\sigma_{1,max}=61,2829 $ &$K_{t1}=3,19$\\
+shaft with relief groove & $\sigma_{1,max}= 54,4842$ &$K_{t1}=2,84$\\
+\hline
+\end{tabular}
+\end{table}
+Ratio of reduction = $\frac{K_{t1}-K_{t2}}{K_{t1}}= 10,97\%$
+\begin{figure}[!h]
+\centering
+\subfloat[][Shaft without relief groove]{\includegraphics[width=.8\textwidth]{/imgHW7/Part1/HW7-MaxFirstStressTorsionMoment_PART1}} \,
+\subfloat[][Shaft relief groove]{\includegraphics[width=.8\textwidth]{/imgHW7/Part2/HW7-MaxFirstStressTorsionMoment_PART2}} 
+\caption{Max First Stress Torsion Moment}
+\label{img:HW7-MFTM}
+\end{figure}
+\pagebreak
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\subsection{Combined moments}
+For last analysis impose a combination of previuos bending moment and torque, Mf $= 1* 10^5 Nm$ and Mt $= 1 * 10^6 Nm$.
+\begin{table}[h]
+\centering
+\begin{tabular}{lcc}
+\hline
+& Maximim first principal\\
+& stress in the model\\
+& $\frac{N}{mm^2}$\\
+\hline
+normal shaft & $\sigma_{1,max}= 66,7419$ \\
+shaft with relief groove & $\sigma_{1,max}=58,3871 $\\
+\hline
+\end{tabular}
+\end{table}
+\begin{figure}[!h]
+\centering
+\subfloat[][Shaft without relief groove]{\includegraphics[width=.7\textwidth]{/imgHW7/Part1/HW7-MaxFirstStressCombMoment_PART1}} \,
+\subfloat[][Shaft relief groove]{\includegraphics[width=.7\textwidth]{/imgHW7/Part2/HW7-MaxFirstStressCombMoment_PART2}} 
+\caption{Max First Stress Combined Moment}
+\label{img:HW7-MFCM}
+\end{figure}\pagebreak
+\section{Conclusion}
+As we can see from results obtained, the stress concentration factor of the two cases, underlined that: in case of bending moment the presence of relief groove obtained a ratio of reduction of $47,53 \%$.
+Otherwise in case of torque moment the ratio of reduction obtained $10,71 \%$.
+Hence the presence of relief groove, decrease especially the bending stress concentration. In conclusion also in case of combined stress in presence of relief groove the stress state is more less than normal shaft.
+\section{Command list}
+\begin{multicols}{2}
+\scriptsize
+\lstinputlisting[language=APDL, style=apdl-modified]{CommandList-HW7.txt}
+\lstinputlisting[language=APDL, style=apdl-modified]{CommandList-HW7Part2.txt}
+\normalsize
+\end{multicols}

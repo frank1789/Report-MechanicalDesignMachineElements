@@ -1,0 +1,15 @@
+\begin{tikzpicture}
+\pgfplotsset{cycle list={blue\\}, major grid style={dashed},}
+\begin{axis}[
+						legend pos=south east,
+						width=15cm,
+						height=10cm,
+ 						xmin=0, xmax=200,
+        				ymin=-60000, ymax=1000,
+        				grid=major,
+        				ylabel=Force $N$,
+        				xlabel=Step]
+\addplot [thick, blue] table[smooth, mark=none, y=force, x=n]{HW6ForcePunch.txt};
+\addlegendentry{Punch's force}
+\end{axis}
+\end{tikzpicture}

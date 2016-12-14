@@ -1,0 +1,159 @@
+\chapter{Homework 2}
+\section{Introduction}
+Using beam elements, build up a FE model of the hook shown in the Figure. Determine the
+maximum displacement, the maximum bending stress, shear and bending moment diagrams. Compare the results obtained considering the cross-sections 1 and 2 shown
+below. Discuss the need of mesh refinement.\\
+\noindent Data:\\
+$F = 20 \, kN \quad E = 205 \, GPa \quad \upsilon=0.3$\\
+\begin{figure}[!h]
+\centering
+\subfloat{\includegraphics[width=.30\textwidth]{/imgHW2/HW2}} \quad
+\subfloat{\includegraphics[width=.45\textwidth]{/imgHW2/HW2-1}} 
+\end{figure}
+\section{Approach the problem}
+For this problem we are first costritute the two custom cross sections, in the figures \ref{img:HW2-KeySection}, \ref{img:HW2-AREASection} and \ref{img:HW2-MeshSection}; can be observed the construction phases then a free mesh is applied to both stat and saved in their respective files.
+\begin{figure}[!h]
+\centering
+\subfloat[][Section 1\label{img:HW2_KEYsec1}]{\includegraphics[width=.65\linewidth]{imgHW2/Part1/KEYPOINT-SEC1}}\,
+\subfloat[][Section 2\label{img:HW2_KEYsec2}]{\includegraphics[width=.65\linewidth]{imgHW2/Part2/KEYPOINT-SEC2}}
+\caption{Keyponit Section}
+\label{img:HW2-KeySection}
+\end{figure}
+\begin{figure}[!h]
+\centering
+\subfloat[][Section 1\label{img:HW2_GEOMsec1}]{\includegraphics[width=.8\linewidth]{imgHW2/Part1/GEOM-SEC1}}\,
+\subfloat[][Section 2\label{img:HW2_GEOMsec2}]{\includegraphics[width=.8\linewidth]{imgHW2/Part2/GEOM-SEC2}}
+\caption{Geometry of sections}
+\label{img:HW2-GeomSection}
+\end{figure}
+\begin{figure}[!h]
+\centering
+\subfloat[][Section 1\label{img:HW2_AREAsec1}]{\includegraphics[width=.8\linewidth]{imgHW2/Part1/AREA-SEC1}}\,
+\subfloat[][Section 2\label{img:HW2_AREAsec2}]{\includegraphics[width=.8\linewidth]{imgHW2/Part2/AREA-SEC2}}
+\caption{Area of sections}
+\label{img:HW2-AREASection}
+\end{figure}
+\pagebreak\\
+\begin{figure}[!h]
+\centering
+\subfloat[][Section 1\label{img:HW2_sec1}]{\includegraphics[width=.8\linewidth]{imgHW2/Part1/MESH-SEC1}}\,
+\subfloat[][Section 2\label{img:HW2_sec2}]{\includegraphics[width=.8\linewidth]{imgHW2/Part2/MESH-SEC2}}
+\caption{Meshed Section}
+\label{img:HW2-MeshSection}
+\end{figure}\noindent
+In this case it is defined the geometry of the hook through the use of \emph{keypoints} and subsequently connected by lines, as ahow in fiugure \ref{img:HW2-Geometry}.
+Then the mesh using the section $n^{\circ}$1 was created in the previuos step and then the section $n^{\circ}$2.\\
+For the section $n^{\circ} 1$ the result in figure \ref{img:HW2_sec1}, while section $n^{\circ} 2$ in picture \ref{img:HW2_sec2}.
+\begin{figure}[!h]
+\centering 
+\subfloat[][Keypoint]{\includegraphics[width=.8\linewidth]{imgHW2/Part1/Keypoint-SEC1-mm-4}}\,
+\subfloat[][Full geometry]{\includegraphics[width=.8\linewidth]{imgHW2/Part2/GEOM-SEC2-mm-4}}
+\caption{Geometry's hook}
+\label{img:HW2-Geometry}
+\end{figure}
+\begin{figure}[!h]
+\centering 
+\subfloat[][Section 1]{\includegraphics[width=.8\linewidth]{imgHW2/Part1/FORCE-SEC1-mm-4}}\,
+\subfloat[][Section 2]{\includegraphics[width=.8\linewidth]{imgHW2/Part2/FORCE-SEC2-mm-4}}
+\caption{Hook meshed and costraint}
+\label{img:HW2-Mesh+Costraint}
+\end{figure}
+\section{Result}
+In conclusion is shown in the table of performance comparison of the two cross section.\\
+\begin{table}[!h]
+\centering
+\begin{tabular}{lcccc}
+\hline
+       Area  	& Displacement & maximum bending stress	 & minimum bending stress\\
+    $mm^2$ &	 $mm$			& $MPa$				& $MPa$\\
+\hline
+       	1000	&	2,59533		&283,82				&-324,366\\
+\hline
+\end{tabular}
+\caption{Recap section 1}
+\label{table:HW2:RecapSec1}
+\end{table}
+\begin{table}[!h]
+\centering
+\begin{tabular}{cccc}
+\hline
+       Area  & Displacement 	& maximum 	bending stress	& minimum bending stress\\
+    $mm^2$ &	 $mm$			& $MPa$				& $MPa$\\
+\hline
+    658,84	&	2,8004			&	318,819			&	-318,819\\
+\hline
+\end{tabular}
+\caption{Recap section 2}
+\label{table:HW2:RecapSec2}
+\end{table}
+\begin{enumerate}
+\item It is observed in the first section a greater deformation despite the area is larger in size when compared with the second.
+\item Whereas the difference in the area of the sections, the displacement of the section 2 is similar to the first.
+\item Section 2 does not show differences in the stress since Section 1.
+\end{enumerate}
+In conclusion it is observed a better performance of the section 2 to equal forces applied.
+Subsequently, the analysis is repeated increased the division into examination number generating, therefore, a more dense mesh from which it is observed that the obtained have results are very close, in the table \ref{tab:HW2-ref1}, \ref{tab:HW2-ref2}.
+\begin{table}[!h]
+\centering
+\input{HW2Comp}
+\caption{Sensibility result to mesh refiniment}
+\label{tab:HW2-ref1}
+\end{table}
+\begin{table}[!h]
+\centering
+\input{HW2Comp2}
+\caption{Sensibility result to mesh refiniment}
+\label{tab:HW2-ref2}
+\end{table}
+\pagebreak\\
+The following pictures shows the results obtained from the simulation.
+\begin{figure}[!h]
+\centering
+\subfloat[][Section 1]{\includegraphics[width=.65\linewidth]{imgHW2/Part1/Displacemt-SEC1-mm-4}}\,
+\subfloat[][Section 2]{\includegraphics[width=.65\linewidth]{imgHW2/Part2/Displacemt-SEC2-mm-4}}
+\label{img:HW2-Displacemt}
+\caption{Result Displacement diagram}
+\end{figure}
+\begin{figure}[!h]
+\centering 
+\subfloat[][Section 1]{\includegraphics[width=.8\linewidth]{imgHW2/Part1/NODALSOLUTION-SEC1-mm-4}}\,
+\subfloat[][Section 2]{\includegraphics[width=.8\linewidth]{imgHW2/Part2/NODALSOLUTION-SEC2-mm-4}}
+\label{img:HW2-NodalSolu}
+\caption{Result nodal solution diagram}
+\end{figure}
+\begin{figure}[!h]
+\centering 
+\subfloat[][Section 1]{\includegraphics[width=.8\linewidth]{imgHW2/Part1/BENDINMAX-SEC1-mm-4}}\,
+\subfloat[][Section 2]{\includegraphics[width=.8\linewidth]{imgHW2/Part2/BENDINMAX-SEC2-mm-4}}
+\label{img:HW2-bendingmax}
+\caption{Result max bending diagram}
+\end{figure}
+\begin{figure}[!h]
+\centering 
+\subfloat[][Section 1]{\includegraphics[width=.8\linewidth]{imgHW2/Part1/BENDINGMIN-SEC1-mm-4}}\,
+\subfloat[][Section 2]{\includegraphics[width=.8\linewidth]{imgHW2/Part2/BENDINGMIN-SEC2-mm-4}}
+\label{img:HW2-bendingmin}
+\caption{Result minimum bending stress diagram}
+\end{figure}
+\begin{figure}[!h]
+\centering 
+\subfloat[][Section 1]{\includegraphics[width=.8\linewidth]{imgHW2/Part1/MOMENT-SEC1-mm-4}}\,
+\subfloat[][Section 1]{\includegraphics[width=.8\linewidth]{imgHW2/Part1/MOMENT-SEC1-mm-4}}
+\label{img:HW2-Moment}
+\caption{Result Moment diagram}
+\end{figure}
+\begin{figure}[!h]
+\centering
+\subfloat[][Section 1]{\includegraphics[width=.8\linewidth]{imgHW2/Part1/SHEAR-SEC1-mm-4}}\,
+\subfloat[][Section 2]{\includegraphics[width=.8\linewidth]{imgHW2/Part2/SHEAR-SEC2-mm-4}}
+\label{img:HW2-Shear}
+\caption{Result shear diagram}
+\end{figure}
+\section{Command list}
+\begin{multicols}{2}
+\scriptsize
+\lstinputlisting[language=APDL, style=apdl-modified]{CListHW2-Sec1.txt}
+\lstinputlisting[language=APDL, style=apdl-modified]{CListHW2-Sec2.txt}
+\lstinputlisting[language=APDL, style=apdl-modified]{CommandListHW2-SEC1.txt}
+\normalsize
+\end{multicols}

@@ -1,0 +1,159 @@
+\chapter{Homework 1}
+\section{Introduction}
+\subsection{Problem 1}
+Elaborate a Finite Element model of the Pratt truss bridge shown in the figure in order to determine nodal deflection, reaction forces and axial stresses
+\begin{figure}[h]
+\centering %centrata
+\includegraphics[width=0.8\linewidth]{imgHW1/HW1-1} 
+\end{figure}
+\\The two bottom chords are subjected to a vertical distributed load with intensity of 20000 N/m.
+The dimensions are given in mm. One side of the bridge is pinned-supported, the other is
+roller-supported. The trusses have the following cross-sectional areas:\\\\
+\begin{tabular}{lccllrll}
+Bottom chord,\\ 
+top chord,  struts:	& A1 	& = 	& 1000	&$mm^2$	& material: 	&steel\\
+Sway bracing:			& A2		& =	& 600 		&$mm^2$	& E 				&	=	&210 GPa\\
+Top lateral bracing:	& A3		& =	& 400		&$mm^2$	& $\upsilon$&	= 	&0.3\\
+\end{tabular}
+\subsection{Problem 2}
+The shape of the bridge is then modified by moving the y coordinate of the nodes of the
+top chord by $\Delta y1$ and $\Delta y2$ as shown in the figure. Determine the values of $\Delta y1$ and $\Delta y2$ that
+minimize the maximum deflection.
+\begin{figure}[h]
+\centering %centrata
+\includegraphics[width=0.8\linewidth]{imgHW1/HW1-2}
+\end{figure}
+\section{Approach the problem}
+It has defined a simplified diagram of the structure under consideration, making the following assumptions:\\
+\begin{itemize}
+\item bottom chord's node = 7;
+\item total lenght = 24 $m$;
+\item distritbute load $F = \frac{20000\,\frac{N}{m}*\, 24\,m}{7}$
+\item element type: \textsc{Link180}
+\end{itemize}
+%========================================
+\begin{figure}[!h]
+\centering
+    \resizebox{.8\linewidth}{!}{\input{tikz-HW1.tex}}
+\caption{Bridge scheme}
+\label{img:HW1:Sche}
+\end{figure}
+%========================================
+\noindent To fix the problem, we started the construction of the model building nodes and subsequently connected with \emph{"truss"} elements, come the results shows in the figure \ref{img:HW1-modelGeom}.
+Constraints to the bridge ends were added as requested by the problem. A distributed force was applied along the length of the two bays.
+Later it was used the same model to analyze the second question.
+\begin{figure}[!h]
+\centering
+\includegraphics[width=0.8\linewidth]{imgHW1/GeometryLoad}
+\caption{Model loaded and bound structure}
+\label{img:HW1-modelGeom}
+\end{figure}
+\section{Result}
+\subsection{Problem 1}
+In the post processing simulation results are observed in the figures \ref{img:HW1-AxialForce} and \ref{img:HW1-AxialStress}, where you can observe the distribution of axial forces and the distribution of axial stress respectively.\\
+The displacement of the nodes is shown in the figure \ref{img:HW1-Displacement}, where it is possible to observe that the maximum displacement is obtained in the vicinity of the nodes and is equal to $62,7759 \, mm$.
+\begin{figure}[!h]
+\centering %centrata
+\includegraphics[width=0.8\linewidth]{imgHW1/AxialForce}
+\caption{Distibution of axial force}
+\label{img:HW1-AxialForce}
+\end{figure}
+\begin{figure}[!h]
+\centering %centrata
+\includegraphics[width=0.8\linewidth]{imgHW1/AxialStress}
+\caption{Distibution of axial stress}
+\label{img:HW1-AxialStress}
+\end{figure}
+\begin{figure}[!h]
+\centering %centrata
+\includegraphics[width=0.8\linewidth]{imgHW1/Displacement}
+\caption{Displacement of the structure}
+\label{img:HW1-Displacement}
+\end{figure}\pagebreak\\
+\subsection{Problem 2}
+For the second question we have used the command \textsc{\emph{NMODIF}} as required to change the position of the nodes by varying the height in order to obtain the minimum deflection of the structure. It has been avoided during the execution of the loop, all those configurations like "M" shape.
+\begin{table}[h]
+\centering
+\footnotesize
+\begin{tabular}{ccccccc}
+\hline
+Number	  & 					  &					  &deflaction & deflaction & deflaction\\
+interaction & $\Delta y1$ & $\Delta y2$ &  node 15    &  node 16  & node 17\\
+				  &					  &					  & [mm]       & [mm]       & [mm]\\
+\hline
+806 &   7100,00 &   7100,00 &   -29,4321048924 &   -30,9574832350 &   -29,4321048924\\
+807 &   7100,00 &   7200,00 &   -29,2877380752 &   -30,3744253498 &   -29,2877380752\\
+808 &   7100,00 &   7300,00 &   -29,1891942493 &   -29,8702541041 &   -29,1891942493\\
+809 &   7100,00 &   7400,00 &   -29,1335772891 &   -29,4401993777 &   -29,1335772891\\
+\color{red}810 &\color{red}   7100,00 &\color{red}   7500,00 & \color{red}  -29,1182105600 &  \color{red} -29,0798440735 &\color{red}   -29,1182105600\\
+811 &   7100,00 &   7600,00 &   -29,1406179070 &   -28,7850939406 &   -29,1406179070\\
+812 &   7100,00 &   7700,00 &   -29,1985064925 &   -28,5521503107 &   -29,1985064925\\
+813 &   7100,00 &   7800,00 &   -29,2897512823 &   -28,3774854310 &   -29,2897512823\\
+814 &   7100,00 &   7900,00 &   -29,4123810029 &   -28,2578201188 &   -29,4123810029\\
+815 &   7100,00 &   8000,00 &   -29,5645654149 &   -28,1901034907 &   -29,5645654149\\
+\hline
+\end{tabular}
+\caption{Displacement of bridge}
+\label{tab:WH1-Disp}
+\end{table}\\\pagebreak
+\newpage
+\noindent In the graph \ref{img:1-Disp} is observable the needed results of the iterations, we obtain by moving nodes of a value equal to $\Delta y1 = 3100 \, mm$ to the node 15 and 17 and an increase equal to $\Delta y2 = 3500 \, mm$ to the node 15.\\
+\noindent The configuration of the structure with minimum deflection is observable in Figure \ref{fig:HW1-nodemod} where the displacement is equal to $31,6387 \, mm$.
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}
+\pgfplotsset{cycle list={cyan\\purple\\},major grid style={dashed},}
+\begin{axis}[
+					width=15cm,
+					height=9cm,
+ 					 xmin=-10, xmax=1000,
+        			ymin=-90, ymax=0,
+					grid=major,
+					xlabel=Iteration number,
+					ylabel=Deflection $mm$]
+\addplot table[smooth,mark=none, y=def1, x=n]{data.dat};
+\addlegendentry{deflection node 15}
+\addplot table [smooth,mark=none, y=def2, x=n]{data.dat};
+\addlegendentry{deflection node 16}
+\addplot[mark=none, black,domain=-10:810, samples=2, dash dot]
+ {-29.11821056};
+\draw [dash dot](axis cs:810,-90) -- (axis cs:810,-29.11821056) node [above] {
+\textsc{\tiny \color{red}min deflection}};
+\end{axis}
+\end{tikzpicture}
+%===Zoom===========================
+\begin{tikzpicture}
+\pgfplotsset{cycle list={cyan\\purple\\},major grid style={dashed},}
+\begin{axis}[
+						width=15cm,
+						height=5cm,
+ 						xmin=800, xmax=900,
+        				ymin=-35, ymax=-20,
+						grid=major,
+						xlabel= Iteration number,
+						ylabel= Deflection $mm$]
+\addplot table[smooth,mark=none, y=def1, x=n]{data.dat};
+\addlegendentry{deflection node 15}
+\addplot table [smooth,mark=none, y=def2, x=n]{data.dat};
+\addlegendentry{deflection node 16}
+\addplot[mark=none, black,domain=-10:810, samples=2, dash dot]
+ {-29.11821056};
+\draw [dash dot](axis cs:810,-90) -- (axis cs:810,-29.11821056) node [above] {
+\textsc{\tiny \color{red}min deflection}};
+\end{axis}
+\end{tikzpicture}
+\caption{Displacement of bridge}
+\label{img:1-Disp}
+\end{figure}
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\linewidth]{imgHW1/Displacement-modifyA810}
+\caption{minimum deflaction}
+\label{fig:HW1-nodemod}
+\end{figure}
+\section{Command list}
+\begin{multicols}{2}
+\scriptsize
+\lstinputlisting[language=APDL, style=apdl-modified]{CommandListHW1.txt}
+\normalsize
+\end{multicols}

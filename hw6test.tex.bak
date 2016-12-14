@@ -1,0 +1,43 @@
+\begin{tikzpicture}
+\pgfplotsset{major grid style={dashed},}
+\begin{axis}[
+						%legend pos=south east,
+						width=15cm,
+						height=10cm,
+        				grid=major,
+        				ylabel=Stress $MPa$,
+        				xlabel=Radius $mm$]
+\addplot [thick, NavyBlue, smooth, mark=none] table[y={sx}]  {risultati_linea1_vert.txt};
+\addplot [thick, Dandelion, smooth, mark=none] table[y={sy}]  {risultati_linea1_vert.txt};
+\addplot [thick, ForestGreen, smooth, mark=none] table[y={sxb}]{risultati_linea1_vert.txt};
+\addplot [thick, RubineRed, smooth, mark=none] table[y={syb}]{risultati_linea1_vert.txt};
+\addplot [thick, NavyBlue, smooth, mark=none] table[y={sx}]  {risultati_linea2_vert.txt};
+\addplot [thick, Dandelion, smooth, mark=none] table[y={sy}]  {risultati_linea2_vert.txt};
+\addplot [thick, ForestGreen, smooth, mark=none] table[y={sxb}]{risultati_linea2_vert.txt};
+\addplot [thick, RubineRed, smooth, mark=none] table[y={syb}]{risultati_linea2_vert.txt};
+\end{axis}
+\end{tikzpicture}
+
+\begin{tikzpicture}
+\pgfplotsset{major grid style={dashed},}
+\begin{axis}[
+						%legend pos=south east,
+						width=15cm,
+						height=10cm,
+        				grid=major,
+        				ylabel=Stress $MPa$,
+        				xlabel=Radius $mm$]
+\addplot [thick, NavyBlue, smooth, mark=none] table[y={sx}]   {risultati_linea1_orizz.txt};
+\addlegendentry{membrane circumferential efforts}
+\addplot [thick, Dandelion,smooth, mark=none] table[y={sy}]   {risultati_linea1_orizz.txt};
+\addlegendentry{meridional membrane efforts}
+\addplot [thick, ForestGreen, smooth, mark=none] table[y={sxb}]{risultati_linea1_orizz.txt};
+\addlegendentry{efforts circumferential flexural}
+\addplot [thick, RubineRed, smooth, mark=none] table[y={syb}]{risultati_linea1_orizz.txt};
+\addlegendentry{meridional efforts flexural}
+\addplot [thick, NavyBlue, smooth, mark=none] table[y={sx}]  {risultati_linea2_orizz.txt};
+\addplot [thick, Dandelion, smooth, mark=none] table[y={sy}]  {risultati_linea2_orizz.txt};
+\addplot [thick, ForestGreen, smooth, mark=none] table[y={sxb}]{risultati_linea2_orizz.txt};
+\addplot [thick, RubineRed, smooth, mark=none] table[y={syb}]{risultati_linea2_orizz.txt};
+\end{axis}
+\end{tikzpicture}

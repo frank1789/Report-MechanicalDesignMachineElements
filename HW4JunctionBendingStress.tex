@@ -1,0 +1,15 @@
+\begin{tikzpicture}
+\pgfplotsset{cycle list={blue\\}, major grid style={dashed},}
+\begin{axis}[
+						%legend pos=south east,
+						width=15cm,
+						height=10cm,
+        				grid=major,
+        				ylabel=Stress $MPa$,
+        				xlabel=Radius $mm$]
+\addplot [thick, cyan, smooth, mark=none] table[y={sxb}]{JunctionBendingStress.txt};
+\addlegendentry{Meridional stress}
+\addplot [thick, green, smooth, mark=none] table[y={syb}]{JunctionBendingStress.txt};
+\addlegendentry{Circumferential stress}
+\end{axis}
+\end{tikzpicture}

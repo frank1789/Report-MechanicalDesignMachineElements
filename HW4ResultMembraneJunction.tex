@@ -1,0 +1,15 @@
+\begin{tikzpicture}
+\pgfplotsset{cycle list={blue\\}, major grid style={dashed},}
+\begin{axis}[
+						legend pos=south east,
+						width=15cm,
+						height=10cm,
+        				grid=major,
+        				ylabel=Stress $MPa$,
+        				xlabel=Radius $mm$]
+\addplot [thick, teal, smooth, mark=none] table[y={sx}]{ResultMembraneJunction.txt};
+\addlegendentry{Meridional stress}
+\addplot [thick, purple, smooth, mark=none] table[y={sy}]{ResultMembraneJunction.txt};
+\addlegendentry{Circumferential stress}
+\end{axis}
+\end{tikzpicture}

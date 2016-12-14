@@ -1,0 +1,138 @@
+\chapter{Homework 3}
+\begin{minipage}{.70\textwidth}
+\centering
+\includegraphics[width=0.8\linewidth]{imgHW3/HW3}
+\end{minipage}
+\begin{minipage}{.70\textwidth}
+\begin{tabular}{l}
+        DATA:\\
+        $\frac{D}{d} = 1.4 $\\
+        $\frac{r}{d} = \frac{1}{20} $\\
+        $R = \frac{(D-d)}{2}$\\
+        Material: steel
+\end{tabular}
+\end{minipage}\\\\
+The figure illustrates a shouldered shaft carrying a relief groove to reduce the notch stress concentration effect. The shaft is subject to an axial load F. Using axisymmetric plane elements, build up a FE model that allows:
+\begin{enumerate}
+\item determining the stress concentration factor in the absence of the relief groove. Carry out a convergence analysis and compare the obtained result with solutions available in the literature.
+\item determining the stress concentration factor as a function of the non-dimensional position x of the relief groove. Try to identify an optimal position. Use a mesh refinement level similar to that obtained in the convergence analysis carried out in point 1).\\
+The stress concentration factor is defined as:
+$Kt = \sigma_{1,max};\, \sigma_{1,max}$: maximum first principal stress in the model; $S_{net} = \frac{F}{\frac{\pi}{4}d^2}$.\\
+ It is required to create a mapped mesh at least in the neighbourhood of the fillets of the shoulder and at the groove. Pay attetion to avoid distorted elements. Apply the axial force as a uniformly distributed pressure.
+ \end{enumerate}
+\section{Approach the problem}
+For this problem we have adopted element type \emph{\textsc{Plane182}} for the problem without relief groove, on the other hand we have adoptd element type \emph{\textsc{Plane183}} for the shaft with relief groove because \textsc{plane183} is well suited to model irregular meshes.\\
+The cross section of the shaft is created with axisymmetric elements along the y-direction.\\
+A mesh refinement acting along the shoulder surface is made in order to avoid worthless computational costs. 
+The main assumption adopted in the resolution of the problem is the choice of the keyoptions.
+\begin{itemize}
+\item The element technology:
+Keyoption(1) = 0 due to the only axial traction of the shaft (no bending moment domination);
+\item Structural behavior:
+Keyoption(3) =  1 due to the axisymmetry of the problem.
+\end{itemize}
+The material present the follow proprities:
+\begin{itemize}
+\item Modulus of elasticity: $210\, GPa$;
+\item Poissons ratio $0.3$.
+\end{itemize}
+The shaft is loaded along the axis $y$ with a distributed force.\\
+Finally we set \emph{keyopt} for axisymmetric element behaviour.
+The two tree models were constructed by placing the keypoint and then connected by lines, both have sub-divisions in areas to generate the mapped mesh. The groove is a function of the parameter x, the geometric model is observable in the figures \ref{img:HW3-Geometry}, while in subsequent images \ref{img:HW3-mesh}, the mesh model.
+\begin{figure}[!h]
+\centering
+\subfloat[][Shaft without relief groove]{\includegraphics[width=.8\textwidth]{/imgHW3/Part1/HW3-Geometry_PART1}} \,
+\subfloat[][Shaft relief groove]{\includegraphics[width=.8\textwidth]{/imgHW3//Part2/HW3-Geometry_PART2}} 
+\caption{Geometry Model}
+\label{img:HW3-Geometry}
+\end{figure}
+\begin{figure}[!h]
+\centering
+\subfloat[][Shaft without relief groove]{\includegraphics[width=.8\textwidth]{/imgHW3/Part1/HW3-Mesh_PART1}} \,
+\subfloat[][Shaft relief groove]{\includegraphics[width=.8\textwidth]{/imgHW3//Part2/HW3-Mesh_PART2}}
+\caption{Mapped mesh's model}
+\label{img:HW3-mesh}
+\end{figure}
+\section{Result}
+The stress concentration factor is defined as:
+\[
+	K_{t} = \frac{\sigma_{1,Max}}{S_{net}} 
+\]
+$\sigma_{1,Max}$ is equal to maximum first principal stress in the model:
+\[
+	S_{net}=\frac{F}{\frac{\pi}{4} d^{2}} = 15000 \, MPa
+\]
+After analysis of convergence can be observed, in the table \ref{table:HW3-KtWithoutRelief}, that as the number of mesh divisions of the $K_{t}$ value tends to stabilize toward the value $K_{t} \approx 2,4$. On the other hand it is observed that for a bonus multiplier of the divisions\footnote{we have adopte: 
+	\begin{tabular}{l}
+		n\_div\_a, $3*i$\\ 
+		n\_div\_b, $2*i$\\
+		n\_div\_c, $3*i$
+	\end{tabular}
+} 
+of $10$ you get a value close to that available in the literature in fact, the theoretical value is approximately equal to $K_{t}=2,3$; show in figure \ref{img:HW3-KtGraph}.\begin{figure}[!h]
+\centering
+\includegraphics[width=.8\textwidth]{/imgHW3/Kt-Graph}
+\caption{stress intensity factor graph}
+\label{img:HW3-KtGraph}
+\end{figure}\\
+\noindent Instead performing a refinement of the mesh in the areas of the fillet it leads to a smaller number of divisions and a comparable number of elements thereby reducing the computational cost.\\
+In fact, just a multiplier $4$ to obtain $12$ divisions are needed with a level 1 refinement to obtain a number of elements equal to $788$ and a $K_{t}=2,334$ close to the theoretical value first found, like show in table \ref{table:HW3-KtWithoutReliefREF}.\pagebreak
+\begin{table}[t]
+\centering
+\input{HW3ConvAna}
+\caption[]{Number of division without refiniment}
+\label{table:HW3-KtWithoutRelief}
+\end{table}
+\noindent In the second part of the problem, where the model with relief grooves, it is set to the same size of the mesh and refinement level of the previous model calculated in the first part of the problem of obtaining a $K_{t}=1,762$ as a function of the dimensionless value \textsc{x} where \textsc{x} = $1,5$.  It can be seen in figure \ref{img:HW3-KtFunc} trends the fly $K_{t}$ as \textsc{x} changes.
+\begin{table}[!h]
+\centering
+\input{HW3ConvAnaRrf}
+\caption[]{Number of division with refiniment}
+\label{table:HW3-KtWithoutReliefREF}
+\end{table}
+\begin{figure}[!h]
+\centering
+\begin{tikzpicture}
+\pgfplotsset{cycle list={cyan\\purple\\},major grid style={dashed},}
+\begin{axis}[
+					ymin = 1.60,
+					ymax = 2.2,
+					width = 15cm,
+					height = 7.5cm,
+					grid=major,
+					xlabel= Iteration number $x$,
+					ylabel= Stress intesitivity factor $K_{t}$]
+\addplot table[smooth, Aquamarine, mark=none, y=kt, x=x]{S1max.txt};
+\end{axis}
+\end{tikzpicture}
+\caption{$K_{t}$ function of \textsc{x}}
+\label{img:HW3-KtFunc}
+\end{figure}
+\begin{figure}[!h]
+\centering
+\subfloat[][Shaft without relief groove]{\includegraphics[width=.8\textwidth]{/imgHW3/Part1/HW3-Displacement_PART1}} \,
+\subfloat[][Shaft relief groove]{\includegraphics[width=.8\textwidth]{/imgHW3//Part2/HW3-Displacement_PART2}} 
+\caption{Displacement}
+\label{img:HW3-displacement}
+\end{figure}
+\begin{figure}[!h]
+\centering
+\subfloat[][Shaft without relief groove]{\includegraphics[width=.8\textwidth]{/imgHW3/Part1/HW3-FirstPrincipalStress_PART1}} \,
+\subfloat[][Shaft relief groove]{\includegraphics[width=.8\textwidth]{/imgHW3//Part2/HW3-FirstPrincipalStress_PART2}} 
+\caption{First Principal Stress}
+\label{img:HW3-FirstPrincipalStress}
+\end{figure}
+%\noindent Mesh without refinement approach is more prevently and involves additional computational costs to reach the same results of the refinement approach. 
+%The $K_{t}$ calculated is a bit different from the one available in the literature (2,56  2,2).
+%The optimal configuration for shaft with relief groove  among the results is in the proximity of the shoulder %(in this case 6 mm far from the shoulder).
+\section{Conclusion}
+For the model absence of the relief groove: the analysis without refinement is acceptable,
+comparing literature value found on graph $K_{t} \approx 2,3$ and value before found $K_{t}=2,334$, that is acceptable.\\
+On the other hand, model with relief groove: the stress concentration decreases with decrease of \textsc{x} coefficient, this behavior is normal for shadow effect, where the stress concentration is minor respect at the case without relief groove.
+\section{Command list}
+\begin{multicols}{2}
+\scriptsize
+\lstinputlisting[language=APDL, style=apdl-modified]{CommandList-HW3.txt}
+\lstinputlisting[language=APDL, style=apdl-modified]{CommandList-HW3Part2.txt}
+\normalsize
+\end{multicols}

@@ -1,0 +1,97 @@
+\chapter{Homework 4}
+\begin{minipage}{.70\textwidth}
+\centering
+\includegraphics[width=0.8\linewidth]{imgHW4/HW4}
+\end{minipage}
+\begin{minipage}{.70\textwidth}
+\begin{tabular}{l}
+        DATA:\\
+        Material: steel;\\
+        Pressure: $P_{i}= 10$ \textsc{bar};
+\end{tabular}
+\end{minipage}\\\\
+The figure illustrates a T pipe connector to be used in a hydraulic circuit subject to internal pressure $p_{i}$. Using shell elements and taking into account the symmetry, build up a FE model composed of a mapped mesh that allows:
+\begin{enumerate}
+\item determining (meridional and circumferential) membrane stresses far from the junction between the two pipes;
+\item determining membrane and bending stress distribution along the periphery of the pipes' junction.
+\end{enumerate}
+\section{Approach the problem}
+the elements that compose the structure: are used in three-dimensional shell elements, \textsc{shell181}, having the thickness of the two tubes are first defined. The stress analysis will be conducted on the inner surface and the average plane of the elements.
+You create keypoint, connect via lines and generating areas for extrusion lines, 
+two local references are defined with cylindrical cooordinate to carry out these operations, as show in figure \ref{img:HW4_GEOMsec1}.
+To realize the junction intersected areas that make up the two tubes and the excess arising from its construction have been eliminated. At this point the areas that compose the model are divided into smaller areas in the vicinity of the junction. This is done later to create a denser mesh in this area.
+The result that is obtained is the following \ref{img:HW4_GEOMsec3}.
+\begin{figure}[!h]
+\centering
+\subfloat[][First step construnction\label{img:HW4_GEOMsec1}]{\includegraphics[width=.7\linewidth]{imgHW4/HW4-Geometry_1}}\,
+\subfloat[][Second step construction\label{img:HW4_GEOMsec3}]{\includegraphics[width=.7\linewidth]{imgHW4/HW4-Geometry_3}}
+\caption{Geometry of T pipe}
+\label{img:HW4-GeomSection}
+\end{figure}
+\pagebreak\\
+To realize the mesh are divided all components then mesh mapped areas, show in frame \ref{img:HW4_Mesh}. Particular attention taken into accoutn at zone of junction, result show in \ref{img:HW4_MeshDetail}.\\
+Once sure that the unit vectors normal to the shell elements have always the same direction, fig. \ref{img:HW4-NormSurf}, apply the symmetry constraints and internal pressure. \\They then analyze two different way:
+\begin{itemize}
+\item It sets to 0 the displacement in the y direction of a node: the constraints on symmetry in fact, they do not eliminate this degree of freedom. It could be a rigid translation of the component;
+\item they are binding on the long-x node displacements in the flow line (line used to extrude the tube) because it is assumed that the tube can be extended in this direction. Is done the same for the vertical pipe, then set to zero along the y displacement of the nodes present on the line. In this way also avoids the rigid translation of the model.
+\end{itemize}
+At this point it solves the structure and proceed with the analysis of the results.
+\begin{figure}[!h]
+\centering
+\includegraphics[width=.8\linewidth]{imgHW4/HW4-Mesh}
+\caption{Meshed model}
+\label{img:HW4_Mesh}
+\end{figure}
+\begin{figure}[!h]
+\centering
+\includegraphics[width=.8\linewidth]{imgHW4/HW4-Mesh-Zoom}
+\caption{Detail of the mesh to the pipe joint }
+\label{img:HW4_MeshDetail}
+\end{figure}
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.8\linewidth]{imgHW4/HW4-NormSurf}
+\caption{Vector normal to surface}
+\label{img:HW4-NormSurf}
+\end{figure}\\
+\pagebreak
+\section{Result}
+The membrane stress are visible in \ref{img:HW4_SX1} and \ref{img:HW4_SY1},
+it is noted that at a certain distance from the junction of the membrane stress assume nearly costant value and the flexural value close to zero. It then sees that in the proximity of junction of the flexural stress become important and are obtained for very high value of stress.
+Regarding the convergence of the solution, it can be seen that going to densify the mesh the value of the stress on the junction does not converge as this area subject to a strucutral singlularity.
+\begin{figure}[!h]
+\centering
+\subfloat[][Full view \label{img:HW4_SX1}]{\includegraphics[width=.7\linewidth]{imgHW4/HW4-SolutionSX}}\,
+\subfloat[][Detail at junction \label{img:HW4_SX1zoom}]{\includegraphics[width=.7\linewidth]{imgHW4/HW4-SolutionSX-Zoom}}
+\caption{Membrane meridional stress}
+\label{img:HW4-SX}
+\end{figure}
+\begin{figure}[!h]
+\centering
+\subfloat[][Full view \label{img:HW4_SY1}]{\includegraphics[width=.8\linewidth]{imgHW4/HW4-SolutionSY}}\,
+\subfloat[][Detail at junction\label{img:HW4_SY1zoom}]{\includegraphics[width=.8\linewidth]{imgHW4/HW4-SolutionSY-Zoom}}
+\caption{Membrane circumferential stress}
+\label{img:HW4-SY}
+\end{figure}\\\pagebreak
+\newpage
+\noindent It then conducted a more detailed analysis going to represent on a graph the progress of efforts along the axial direction of the two tubes, starting from the most distant areas from the junction until you get near it, the result obtained are show in graphs \ref{img:HW4-StressVerticalPipe} for vertical pipe and \ref{img:HW4-StressHorizontalPipe} for horizontal pipe.
+\begin{figure}[!h]
+\centering
+    \resizebox{.8\linewidth}{!}{\input{HW4StressVerticalPipe.tex}}
+    \caption{Stress vertical pipe}
+    \label{img:HW4-StressVerticalPipe}
+\end{figure}
+\begin{figure}[!h]
+\centering
+    \resizebox{.8\linewidth}{!}{\input{HW4StressHorizzontalPipe.tex}}
+    \caption{Stress horizontal pipe}
+    \label{img:HW4-StressHorizontalPipe}
+\end{figure}
+\section{Conclusion}
+The obtained results confirm what was found earlier: the flexural stresses are very low away from the junction and become higher in the vicinity of it; the membrane efforts are constant along the tube and, as regards those circumferential, assume very high values on the junction.
+\section{Command list}
+\begin{multicols}{2}
+\tiny
+\lstinputlisting[language=APDL, style=apdl-modified]{CommandList-HW4.txt}
+\normalsize
+\end{multicols}

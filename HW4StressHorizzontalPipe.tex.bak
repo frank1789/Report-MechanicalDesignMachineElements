@@ -1,0 +1,40 @@
+%\begin{tikzpicture}
+%\pgfplotsset{cycle list={blue\\}, major grid style={dashed},}
+%\begin{axis}[
+%						legend pos=south east,
+%						width=15cm,
+%						height=10cm,
+%        				grid=major,
+%        				ylabel=Stress $MPa$,
+%        				xlabel=Radius $mm$]
+%\addplot [thick, BurntOrange, smooth, mark=none] table[y={sx}]{StressHorizzontalPipe.txt};
+%\addlegendentry{Meridional stress}
+%\addplot [thick, NavyBlue, smooth, mark=none] table[y={sy}]{StressHorizzontalPipe.txt};
+%\addlegendentry{Circumferential stress}
+%\end{axis}
+%\end{tikzpicture}
+
+\begin{tikzpicture}
+\pgfplotsset{major grid style={dashed},}
+\begin{axis}[
+						%legend pos=south east,
+						legend cell align={left},
+						width=15cm,
+						height=10cm,
+        				grid=major,
+        				ylabel=Stress $MPa$,
+        				xlabel=Distance $mm$]
+\addplot [thick, NavyBlue, smooth, mark=none] table[y={sx}]   {HorizzontalStress1.txt};
+\addlegendentry{membrane circumferential efforts}
+\addplot [thick, Dandelion,smooth, mark=none] table[y={sy}]   {HorizzontalStress1.txt};
+\addlegendentry{meridional membrane efforts}
+\addplot [thick, ForestGreen, smooth, mark=none] table[y={sxb}]{HorizzontalStress1.txt};
+\addlegendentry{efforts circumferential flexural}
+\addplot [thick, RubineRed, smooth, mark=none] table[y={syb}]{HorizzontalStress1.txt};
+\addlegendentry{meridional efforts flexural}
+\addplot [thick, NavyBlue, smooth, mark=none] table[y={sx}]  {HorizzontalStress2.txt};
+\addplot [thick, Dandelion, smooth, mark=none] table[y={sy}]  {HorizzontalStress2.txt};
+\addplot [thick, ForestGreen, smooth, mark=none] table[y={sxb}]{HorizzontalStress2.txt};
+\addplot [thick, RubineRed, smooth, mark=none] table[y={syb}]{HorizzontalStress2.txt};
+\end{axis}
+\end{tikzpicture}

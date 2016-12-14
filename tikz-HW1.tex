@@ -1,0 +1,67 @@
+\begin{tikzpicture}[>=latex]
+%===DEF. COMPONENTS====
+ \def\carrello(#1,#2,#3){
+ \begin{scope}[shift={(#1,#2)}]
+ \node[draw,circle,fill=#3,minimum width=0.01cm] (S) at (0,0){};
+ \draw (S) -- (-0.4,-0.8) -- (+0.4,-0.8) -- (S);
+ \draw (0.25,-0.9) circle[radius = 0.1];
+ \draw (-0.25,-0.9) circle[radius = 0.1];
+ \node (g1) at (0,-1) [ground,anchor=north]{};
+ \draw (g1.north west) -- (g1.north east);
+ \end{scope}
+}
+
+\def\cerniera(#1,#2,#3){
+ \begin{scope}[shift={(#1,#2)}]
+ \node[draw,circle,fill=#3,minimum width=0.01cm] (S) at (0,0){};
+ \draw (S) -- (-0.4,-1) -- (+0.4,-1) -- (S);
+ \node (g1) at (0,-1) [ground,anchor=north]{};
+ \draw (g1.north west) -- (g1.north east);
+ \end{scope}
+}
+%===2D Frame===
+\tikzset{ground/.style ={fill, pattern = north east lines, draw = none, minimum width = 0.75cm, minimum height = 0.3cm}}
+%===scheme struct=====
+\coordinate (a) at (0,0);
+\coordinate (b)	at (4,0);
+\coordinate (c) at (8,0);
+\coordinate (d) at (12,0);
+\coordinate (e) at (16,0);
+\coordinate (f) at (20,0);
+\coordinate (g) at (24,0);
+\coordinate (b1) at (4,4);
+\coordinate (c1) at (8,4);
+\coordinate (d1) at (12,4);
+\coordinate (e1) at (16,4);
+\coordinate (f1) at (20,4);
+%===orizontal line===
+\draw[thick] (a) -- (g);
+\draw[thick] (b1) -- (f1);
+%===oblicque line===
+\draw[thick] (a) -- (b1) ; \draw[thick] (f1) -- (g);
+\draw[thick] (c) -- (b1) ; \draw[thick] (e) -- (f1);
+\draw[thick] (d) -- (c1) ; \draw[thick] (d) -- (e1);
+\draw[thick] (a) -- (b1) ; 
+%===vertical line===
+\draw[thick] (b) -- (b1); \draw[thick] (c) -- (c1);
+\draw[thick] (d) -- (d1); \draw[thick] (e) -- (e1); 
+\draw[thick] (f) -- (f1);
+%===constraint===
+\carrello(24,0,none)
+\cerniera(0,0,none)
+%===force===  
+\coordinate (fmy) at ($(a) + (0,1)$);  
+\draw[red,->] (fmy) -- (a) node[pos=1, above left] {$F$};
+\coordinate (fmy) at ($(b) + (0,1)$); 
+\draw[red,->] (fmy) -- (b) node[pos=1, above left] {$F$};
+\coordinate (fmy) at ($(c) + (0,1)$); 
+\draw[red,->] (fmy) -- (c) node[pos=1, above left] {$F$};
+\coordinate (fmy) at ($(d) + (0,1)$);  
+\draw[red,->] (fmy) -- (d) node[pos=1, above left] {$F$};
+\coordinate (fmy) at ($(e) + (0,1)$); 
+\draw[red,->] (fmy) -- (e) node[pos=1, above left] {$F$};
+\coordinate (fmy) at ($(f) + (0,1)$); 
+\draw[red,->] (fmy) -- (f) node[pos=1, above left] {$F$};
+\coordinate (fmy) at ($(g) + (0,1)$); 
+\draw[red,->] (fmy) -- (g) node[pos=1, above left] {$F$};
+\end{tikzpicture}

@@ -1,0 +1,170 @@
+%========================================
+% PREAMBOLO
+%========================================
+
+% === Impostazione del documento ==========================
+\documentclass[12pt,a4paper,oneside,onecolunm,english,hidelinks]{book}
+\pagenumbering{arabic}
+\usepackage{setspace}
+\onehalfspace
+
+% === Regolazione dei margini =============================
+\addtolength{\oddsidemargin}{30pt}
+\addtolength{\evensidemargin}{-30pt}
+\usepackage{fancyhdr}
+\usepackage{multirow}
+\usepackage{multicol}
+\usepackage[section]{placeins}
+
+% === Impostazione dei font ===============================
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+%\usepackage[italian]{babel}
+\usepackage[english]{babel}
+\usepackage{ae}
+\usepackage{relsize}
+\usepackage{csquotes} 
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{mathdots}
+\usepackage{mathtools}
+\usepackage[colorlinks=true]{hyperref}
+\hypersetup{
+	bookmarksnumbered=true,
+	linkcolor=black,
+	citecolor=black,
+	pagecolor=black,
+	urlcolor=black,
+	pdftex,
+    pdfauthor={Argentieri Francesco}
+}
+\usepackage{verbatim}
+\usepackage{alltt,footnote}
+\DeclareMathOperator{\sgn}{sgn}
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+\DeclarePairedDelimiter{\norma}{\lVert}{\rVert}
+
+% === Integrazione delle figure ===========================
+\usepackage{graphicx}
+\graphicspath{{./imgs/}}
+\renewcommand{\figurename}{Fig.}
+%\usepackage{subfigure}
+\usepackage{subfig}
+\usepackage[dvipsnames]{xcolor}
+
+% === Per gli algoritmi ===================================
+\usepackage{algorithmicx}
+\usepackage[ruled]{algorithm}
+\usepackage{algpseudocode}
+
+% === Per le tabelle ======================================
+\usepackage{tabularx}
+%\usepackage[table]{xcolor}
+
+%==Per le figure latex======================================
+%Package e librerie per TikZ e PGF, le librerie non sono tutte necessarie a questo documento LATEX.
+\usepackage{tikz,fp,ifthen,fullpage}
+\usepackage{pgfmath}
+\usetikzlibrary{decorations.pathmorphing,backgrounds,fit,calc,through}
+\usetikzlibrary{arrows}
+\usetikzlibrary{shapes,decorations,shadows}
+\usetikzlibrary{fadings}
+\usetikzlibrary{patterns}
+\usetikzlibrary{mindmap}
+\usetikzlibrary{decorations.text}
+\usetikzlibrary{decorations.shapes}
+\usepackage{pgfplots}
+\usepgfplotslibrary{colorbrewer}
+\usepgfplotslibrary{patchplots}
+\pgfplotsset{compat=1.13}
+
+%==Per APDL e linguaggi======================================          
+\usepackage{listings,color}
+\definecolor{codeBlue}{RGB}{0,0,255}
+\definecolor{codeGreen}{RGB}{0,128,0}
+\definecolor{codePurple}{RGB}{128,0,255}
+\definecolor{codeOrange}{RGB}{255,128,128}
+\definecolor{codePink}{RGB}{255,0,255}
+\definecolor{codeGray}{rgb}{0.5,0.5,0.5}
+\lstdefinestyle{apdl-modified}
+    {   
+        extendedchars=true,
+        alsoletter={*},
+        alsoletter={'},
+        keywordstyle=\color{codeOrange},
+        keywordstyle=[2]\color{codePurple},
+        keywordstyle=[3],
+        keywordstyle=[4]\color{codePink},
+        otherkeywords={
+            /solve,
+            /angle
+        },
+        keywords=[2]{
+            *abbr,
+            *dim
+        },
+        keywords=[3]{
+            m,
+            d
+        },
+        keywords=[4]{
+            ',
+            -,
+            ",
+            \%,
+            (,
+            ),
+            ,,
+            .,
+            :,
+            ;,
+            ?,
+            ^,
+            ~,
+            +,
+            <,
+            =,
+            >
+        },
+        sensitive=false, % keywords are not case-sensitive
+        morecomment=[l]{!}, % l is for line comment
+        commentstyle=\color{codeGray}, % style of comments
+        numberstyle=\tiny\color{codeGray}
+    }
+\lstdefinelanguage{APDL}{style=apdl-modified}  
+% === Per la bibliografia multicolonna ====================
+\usepackage{etoolbox}
+\patchcmd{\thebibliography}{\list}{\begin{multicols}{2}\smaller\list}{}{}
+\appto{\endthebibliography}{\end{multicols}}     
+
+%========================================
+% TESTO DELLA TESI
+%========================================
+\begin{document}
+	% === Frontespizio ====================================
+	\pagestyle{empty}
+	\input{frontespizio}
+	% === Indice ==========================================
+	\tableofcontents
+
+	% === Capitoli Tesi ===================================
+	\pagestyle{plain}
+	%\input{introduzione}
+	%\input{start}
+	\input{HW1}
+	\input{HW2}
+	\input{HW3}
+	\input{HW4}
+	\input{HW5}
+	\input{HW6}
+	\input{HW7}
+	% Inserite qui gli altri capitoli:
+	%\input{conclusione}
+\nocite{*}
+	% === Bibliografia ====================================
+	\newpage
+	\bibliographystyle{IEEEtran}
+	\bibliography{bibliografia-tesi.bib}
+
+\end{document}
+%========================================

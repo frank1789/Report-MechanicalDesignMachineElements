@@ -1,0 +1,20 @@
+\begin{tikzpicture}
+\pgfplotsset{cycle list={cyan\\magenta\\orange\\pink\\purple\\red\\teal\\violet\\yellow\\}, major grid style ={dashed, gray},}
+\begin{axis}[
+						legend cell align={left},
+						legend pos=south east,
+						width=15cm,
+						height=10cm,
+ 						xmin=0, xmax=25,
+        				ymin=-7, ymax=1,
+						grid=major,
+						xlabel=Radius $mm$,
+						ylabel=Displacement $mm$]
+\addplot [thick, smooth, mark=none] table[y=displacement, x=n]{HW6Set101.txt};
+\addlegendentry{before remove punch}
+\addplot +[stack plots=y, thick] table[smooth, mark=none, y=displacement, x=n ]{HW6Set103.txt};
+\addlegendentry{after remove punch}
+\addplot +[stack plots=y, stack dir=minus, thick ] table[smooth, mark=none, y=displacement, x=n]{HW6Set101.txt};
+\addlegendentry{springback}
+\end{axis}
+\end{tikzpicture}

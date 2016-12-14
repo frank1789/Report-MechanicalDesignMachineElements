@@ -1,0 +1,14 @@
+\begin{tikzpicture}
+\pgfplotsset{major grid style={dashed},}
+\begin{axis}[
+						legend pos=south east,
+						width=15cm,
+						height=10cm,
+						grid=major,
+						ylabel=Displacement $mm$,
+						xlabel=Step]
+\addplot [thick, black, domain=1:100] {(-6/100)*x};
+\addplot [thick, black, domain=100:200] {(6/100)*x-12};
+\addlegendentry{diplacemet}
+\end{axis}
+\end{tikzpicture}

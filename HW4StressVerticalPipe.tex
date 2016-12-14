@@ -1,0 +1,40 @@
+%\begin{tikzpicture}
+%\pgfplotsset{cycle list={blue\\}, major grid style={dashed},}
+%\begin{axis}[
+%						legend pos=south east,
+%						width=15cm,
+%						height=10cm,
+%        				grid=major,
+%        				ylabel=Stress $MPa$,
+%        				xlabel=Radius $mm$]
+%\addplot [thick, blue, smooth, mark=none] table[y={sx}]{StressVerticalPipe.txt};
+%\addlegendentry{Meridional stress}
+%\addplot [thick, red, smooth, mark=none] table[y={sy}]{StressVerticalPipe.txt};
+%\addlegendentry{Circumferential stress}
+%\end{axis}
+%\end{tikzpicture}
+
+\begin{tikzpicture}
+\pgfplotsset{major grid style={dashed},}
+\begin{axis}[
+						%legend pos=south east,
+						legend cell align={left},
+						width=15cm,
+						height=10cm,
+        				grid=major,
+        				ylabel=Stress $MPa$,
+        				xlabel=Distance $mm$]
+\addplot [thick, NavyBlue, smooth, mark=none] table[y={sx}]  {VerticalStress2.txt};
+\addlegendentry{membrane circumferential efforts}
+\addplot [thick, Dandelion, smooth, mark=none] table[y={sy}]  {VerticalStress2.txt};
+\addlegendentry{meridional membrane efforts}
+\addplot [thick, ForestGreen, smooth, mark=none] table[y={sxb}]{VerticalStress2.txt};
+\addlegendentry{efforts circumferential flexural}
+\addplot [thick, RubineRed, smooth, mark=none] table[y={syb}]{VerticalStress2.txt};
+\addlegendentry{meridional efforts flexural}
+\addplot [thick, NavyBlue, smooth, mark=none] table[y={sx}]  {VerticalStress1.txt};
+\addplot [thick, Dandelion, smooth, mark=none] table[y={sy}]  {VerticalStress1.txt};
+\addplot [thick, ForestGreen, smooth, mark=none] table[y={sxb}]{VerticalStress1.txt};
+\addplot [thick, RubineRed, smooth, mark=none] table[y={syb}]{VerticalStress1.txt};
+\end{axis}
+\end{tikzpicture}
